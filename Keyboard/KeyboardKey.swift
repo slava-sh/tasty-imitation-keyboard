@@ -175,6 +175,7 @@ class KeyboardKey: UIControl {
             self.label.minimumScaleFactor = CGFloat(0.1)
             self.label.userInteractionEnabled = false
             self.label.numberOfLines = 1
+            self.label.accessibilityTraits = UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitPlaysSound
         }()
     }
     

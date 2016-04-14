@@ -434,8 +434,7 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             
             // label inset
             switch model.type {
-            case
-            Key.KeyType.ModeChange:
+            case Key.KeyType.ModeChange:
                 key.labelInset = 3
             default:
                 key.labelInset = 0
@@ -445,18 +444,27 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
             switch model.type {
             case Key.KeyType.Shift:
                 if key.shape == nil {
-                    let shiftShape = self.getShape(ShiftShape)
-                    key.shape = shiftShape
+                    let shape = getShape(ShiftShape)
+                    shape.isAccessibilityElement = true
+                    shape.accessibilityTraits = UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitPlaysSound
+                    shape.accessibilityLabel = "shift"
+                    key.shape = shape
                 }
             case Key.KeyType.Backspace:
                 if key.shape == nil {
-                    let backspaceShape = self.getShape(BackspaceShape)
-                    key.shape = backspaceShape
+                    let shape = getShape(BackspaceShape)
+                    shape.isAccessibilityElement = true
+                    shape.accessibilityTraits = UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitPlaysSound
+                    shape.accessibilityLabel = "delete"
+                    key.shape = shape
                 }
             case Key.KeyType.KeyboardChange:
                 if key.shape == nil {
-                    let globeShape = self.getShape(GlobeShape)
-                    key.shape = globeShape
+                    let shape = getShape(GlobeShape)
+                    shape.isAccessibilityElement = true
+                    shape.accessibilityTraits = UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitPlaysSound | UIAccessibilityTraitButton
+                    shape.accessibilityLabel = "Next keyboard"
+                    key.shape = shape
                 }
             default:
                 break
@@ -468,6 +476,9 @@ class KeyboardLayout: NSObject, KeyboardKeyProtocol {
                     if imageKey.image == nil {
                         let gearImage = UIImage(named: "gear")
                         let settingsImageView = UIImageView(image: gearImage)
+                        settingsImageView.isAccessibilityElement = true
+                        settingsImageView.accessibilityTraits = UIAccessibilityTraitKeyboardKey | UIAccessibilityTraitPlaysSound | UIAccessibilityTraitButton
+                        settingsImageView.accessibilityLabel = "Settings"
                         imageKey.image = settingsImageView
                     }
                 }
